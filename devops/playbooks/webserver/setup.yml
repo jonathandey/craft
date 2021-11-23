@@ -1,0 +1,11 @@
+- name: Ensure the Site directories Exists
+  vars:
+    directories:
+      - /etc/caddy/sites-available
+      - /etc/caddy/sites-enabled
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0644'
+    recurse: yes
+  with_items: "{{ directories }}"

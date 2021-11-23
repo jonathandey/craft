@@ -1,6 +1,20 @@
 ---
 - hosts: webserver
   become: yes
+  gather_facts: yes
 
   vars_files:
     - vars.yml
+
+  roles:
+    - role: caddy_ansible.caddy_ansible    
+
+  tasks:
+    - name: Start Caddy Setup
+      include_tasks: setup.yml
+
+    - name: Start Snippets Installation
+      include_tasks: snippets.yml
+
+    - name: Start Default Site Install
+      include_tasks: default.yml

@@ -1,0 +1,35 @@
+(site_v1) {
+	root * {args.0}
+	php_fastcgi unix//run/php/{args.2}-fpm.sock
+	file_server
+
+	header {
+	    X-Frame-Options "SAMEORIGIN"
+	    X-XSS-Protection "1; mode=block"
+	    X-Content-Type-Options "nosniff"
+	}
+
+	# Passing 4xx error codes to the application
+	handle_errors {
+		@4xx expression `{http.error.status_code} >= 400 && {http.error.status_code} < 500`
+		rewrite * /index.php
+	}
+
+	log {
+		output file /var/log/access.log
+	}
+
+	encode {
+		gzip
+
+		match {
+		    header Content-Type text/*
+		    header Content-Type application/json*
+		    header Content-Type application/javascript*
+		    header Content-Type application/xhtml+xml*
+		    header Content-Type application/atom+xml*
+		    header Content-Type application/rss+xml*
+		    header Content-Type image/svg+xml*
+		}
+	}
+}

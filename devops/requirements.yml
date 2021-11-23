@@ -1,3 +1,4 @@
 ---
 roles:
   - name: jnv.unattended-upgrades
+  - name: caddy_ansible.caddy_ansible
