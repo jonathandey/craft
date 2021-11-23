@@ -1,0 +1,19 @@
+---
+- hosts: webserver
+  become: yes
+
+  vars_files:
+    - vars.yml
+
+  # TODO add fail2ban. In the meantime, UFW is rate limiting port 22
+  tasks:
+    - name: Install, Enable & Configure UFW
+      include_tasks: 
+        file: ufw.yml
+        apply:
+          tags:
+            - security
+            - ufw            
+      tags:
+        - security
+        - ufw

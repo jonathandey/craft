@@ -1,0 +1,9 @@
+---
+- hosts: webserver
+  become: yes
+  
+  vars_files:
+    - vars.yml  
+
+  roles:
+    - role: jnv.unattended-upgrades

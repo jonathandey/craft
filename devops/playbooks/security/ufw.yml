@@ -1,0 +1,38 @@
+- name: Ensure UFW is installed
+  ansible.builtin.package:
+    name: ufw
+    state: present
+
+- name: Ensure UFW is enabled & Logging is On
+  community.general.ufw:
+    state: enabled
+    logging: 'on'
+
+- name: Ensure access to SSH is Enabled
+  community.general.ufw:
+    rule: allow
+    port: ssh
+    proto: tcp
+
+- name: Ensure access to HTTP is Enabled
+  community.general.ufw:
+    rule: allow
+    port: 80
+    proto: tcp
+
+- name: Ensure access to HTTPS is Enabled
+  community.general.ufw:
+    rule: allow
+    port: 443
+    proto: tcp
+
+# ufw supports connection rate limiting, which is useful for protecting
+# against brute-force login attacks. ufw will deny connections if an IP
+# address has attempted to initiate 6 or more connections in the last
+# 30 seconds. See  http://www.debian-administration.org/articles/187
+# for details. Typical usage is:    
+- name: Ensure SSH Rate Limiting is Enabled
+  community.general.ufw:
+    rule: limit
+    port: ssh
+    proto: tcp

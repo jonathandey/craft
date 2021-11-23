@@ -1,0 +1,3 @@
+user_name: craft
+# TODO randomly generate this and encrypt it: https://docs.ansible.com/ansible/latest/collections/ansible/builtin/user_module.html#return-password
+# user_password: craftydeplyment

@@ -1,0 +1,7 @@
+---
+- import_playbook: playbooks/updates/main.yml
+- import_playbook: playbooks/security/main.yml
+- import_playbook: playbooks/user/main.yml
+- import_playbook: playbooks/webserver/main.yml
+- import_playbook: playbooks/php/main.yml
+- import_playbook: playbooks/database/main.yml
