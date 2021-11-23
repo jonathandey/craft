@@ -4,7 +4,7 @@
     state: directory
     owner: "{{ craft_user_name }}"
     group: "{{ craft_user_name }}"
-    mode: '0775'
+    mode: '0750'
     recurse: yes        
 
 - name: Ensure the Default Site Exists
@@ -13,7 +13,7 @@
     dest: "/home/{{ craft_user_name }}/default/index.html"
     owner: www-data
     group: root
-    mode: '0755'
+    mode: '0644'
 
 - name: Ensure the Default Site is Available
   vars:
@@ -24,7 +24,7 @@
     dest: "/etc/caddy/sites-available/default"
     owner: root
     group: root
-    mode: '0664'
+    mode: '0644'
 
 - name: Ensure the Default Site is Enabled
   notify: 

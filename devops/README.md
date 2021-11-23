@@ -29,6 +29,7 @@ Todo
 - [ ] Install Composer
 - [ ] Install Supervisor
 - [ ] Manage host sites
+- [ ] Install Nodejs
 - [ ] Install redis
 - [ ] Install restic (backups)
 - [ ] Install & configure Logrotate
