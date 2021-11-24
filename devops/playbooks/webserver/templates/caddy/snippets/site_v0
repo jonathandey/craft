@@ -1,10 +1,13 @@
 (site_v0) {
-	root * {args.0}
-	
-	file_server {
-		# Hide all . files but .well-known
-		hide ^(?!\.well-known).*$
+	@dotfiles {
+		path_regexp (^|\/)\.[^\.\/]+
+		not path /.well-known/*
 	}
+
+	root * {args.0}
+	file_server
+
+	respond @dotfiles 403
 
 	header {
 	    X-Frame-Options "SAMEORIGIN"

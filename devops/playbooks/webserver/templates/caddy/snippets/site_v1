@@ -1,11 +1,13 @@
 (site_v1) {
+	@dotfiles {
+		path_regexp (^|\/)\.[^\.\/]+
+		not path /.well-known/*
+	}
+
 	root * {args.0}
 	php_fastcgi unix//run/php/php{args.1}-fpm.sock
 
-	file_server {
-		# Hide all . files but .well-known
-		hide ^(?!\.well-known).*$
-	}
+	file_server	
 
 	header {
 	    X-Frame-Options "SAMEORIGIN"
@@ -17,7 +19,7 @@
 
 	# Passing 4xx error codes to the application
 	handle_errors {
-		@4xx expression `{http.error.status_code} >= 400 && {http.error.status_code} < 500 &&`
+		@4xx expression `{http.error.status_code} >= 400 && {http.error.status_code} < 500`
 		rewrite * /index.php
 	}
 
