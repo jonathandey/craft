@@ -4,3 +4,12 @@
 
   vars_files:
     - vars.yml
+
+  tasks:
+    - name: Install PHP Versions
+      ansible.builtin.include_role:
+        name: iroquoisorg.php_fpm
+      vars:
+        php_version: "{{ item }}"
+      with_items: "{{ php_versions }}"
+

@@ -1,0 +1,4 @@
+default_php_versions:
+  - "7.4"
+  - "8.0"
+php_versions: "{{ craft_php_versions | default(default_php_versions) }}"

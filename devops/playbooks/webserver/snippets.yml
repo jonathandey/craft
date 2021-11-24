@@ -3,12 +3,15 @@
     path: /etc/caddy/snippets
     state: directory
     mode: '0644'
+    owner: www-data
+    group: root
     recurse: yes
 
 - name: Ensure the Snippets Exist
   vars:
     snippets:
       - { src: caddy/snippets/site_v0, dest: /etc/caddy/snippets/site_v0 }
+      - { src: caddy/snippets/site_v1, dest: /etc/caddy/snippets/site_v1 }
   ansible.builtin.template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"

@@ -4,31 +4,30 @@
     state: directory
     owner: "{{ craft_user_name }}"
     group: "{{ craft_user_name }}"
-    mode: '0750'
+    mode: '0755'
     recurse: yes        
 
 - name: Ensure the Default Site Exists
   ansible.builtin.template:
-    src: caddy/default/index.html
-    dest: "/home/{{ craft_user_name }}/default/index.html"
-    owner: www-data
-    group: root
+    src: caddy/default/index.php
+    dest: "/home/{{ craft_user_name }}/default/index.php"
+    owner: craft
+    group: craft
     mode: '0644'
 
 - name: Ensure the Default Site is Available
   vars:
     hostname: "{{inventory_hostname}}"
     site_path: "/home/{{ craft_user_name }}/default"
+    php_version: "8.0"
   ansible.builtin.template:
-    src: caddy/Site.j2
+    src: caddy/Site_1.j2
     dest: "/etc/caddy/sites-available/default"
     owner: root
     group: root
     mode: '0644'
 
 - name: Ensure the Default Site is Enabled
-  notify: 
-    - Reload caddy
   ansible.builtin.file:
     src: /etc/caddy/sites-available/default
     dest: /etc/caddy/sites-enabled/default

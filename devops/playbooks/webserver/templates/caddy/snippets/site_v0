@@ -1,11 +1,16 @@
 (site_v0) {
 	root * {args.0}
-	file_server
+	
+	file_server {
+		# Hide all . files but .well-known
+		hide ^(?!\.well-known).*$
+	}
 
 	header {
 	    X-Frame-Options "SAMEORIGIN"
 	    X-XSS-Protection "1; mode=block"
 	    X-Content-Type-Options "nosniff"
+	    X-Craft-Server "v0"
 	}
 
 	# Passing 4xx error codes to the application

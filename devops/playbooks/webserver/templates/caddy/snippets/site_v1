@@ -1,17 +1,23 @@
 (site_v1) {
 	root * {args.0}
-	php_fastcgi unix//run/php/{args.2}-fpm.sock
-	file_server
+	php_fastcgi unix//run/php/php{args.1}-fpm.sock
+
+	file_server {
+		# Hide all . files but .well-known
+		hide ^(?!\.well-known).*$
+	}
 
 	header {
 	    X-Frame-Options "SAMEORIGIN"
 	    X-XSS-Protection "1; mode=block"
 	    X-Content-Type-Options "nosniff"
-	}
+	    X-Craft-Server "v0"
+	    X-Craft-PHP-Version "{args.1}"
+	}	
 
 	# Passing 4xx error codes to the application
 	handle_errors {
-		@4xx expression `{http.error.status_code} >= 400 && {http.error.status_code} < 500`
+		@4xx expression `{http.error.status_code} >= 400 && {http.error.status_code} < 500 &&`
 		rewrite * /index.php
 	}
 

@@ -24,15 +24,16 @@ ansible-playbook install-webserver.yml -i inventories/test
 Todo
 
 - [x] Install Caddy Server
-- [ ] Install PHP (allow for multiple versions & cli version)
+- [x] Install PHP (allow for multiple versions & cli version)
 - [ ] Install Mariadb
 - [ ] Install Composer
 - [ ] Install Supervisor
-- [ ] Manage host sites
+- [ ] Manage host sites / SSL Support
 - [ ] Install Nodejs
 - [ ] Install redis
 - [ ] Install restic (backups)
 - [ ] Install & configure Logrotate
+- [ ] Sites git (public) support
 - [ ] Install MeiliSearch
 - [ ] Install Postgres
 - [ ] Install Memcached

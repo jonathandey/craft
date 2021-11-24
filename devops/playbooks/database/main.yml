@@ -1,5 +1,5 @@
 ---
-- hosts: webserver
+- hosts: database
   become: yes
 
   vars_files:
